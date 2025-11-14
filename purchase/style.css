@@ -1,0 +1,147 @@
+       body {
+           font-family: Arial, sans-serif;
+           background: #f8f9fa;
+           margin: 0;
+           padding: 0;
+       }
+
+       .container {
+           width: 80%;
+           margin: 40px auto;
+           background: white;
+           border-radius: 10px;
+           padding: 20px 40px;
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       }
+
+       .form-group {
+           margin-bottom: 15px;
+       }
+
+       label {
+           font-weight: bold;
+           display: block;
+           margin-bottom: 5px;
+       }
+
+       input,
+       textarea,
+       select {
+           width:100%;
+           padding: 8px;
+           border: 1px solid #ccc;
+           border-radius: 4px;
+       }
+
+       .btn-group {
+           display: flex;
+           gap: 10px;
+           margin-top: 20px;
+           text-align: center;
+       }
+
+       button {
+           padding: 10px 20px;
+           border: none;
+           cursor: pointer;
+           border-radius: 4px;
+       }    
+
+       button[name="create"] {
+           background: #28a745;
+           color: white;
+       }
+
+       button[type="reset"] {
+           background: #dc3545;
+           color: white;
+       }
+
+       table {
+           width: 100%;
+           border-collapse: collapse;
+           margin-top: 25px;
+       }
+
+       table,
+       th,
+       td {
+           border: 1px solid #dee2e6;
+       }
+
+       th {
+           background: #343a40;
+           color: white;
+       }
+
+       td,
+       th {
+           padding: 10px;
+           text-align: center;
+       }
+
+       .delete-btn {
+           background: #dc3545;
+           color: white;
+           font-weight: bold;
+           padding: 6px 12px;
+           border-radius: 4px;
+           text-decoration: none;
+       }
+
+       .edit-btn {
+           background: rgb(0, 94, 255);
+           color: white;
+           font-weight: bold;
+           padding: 6px 12px;
+           border-radius: 4px;
+           text-decoration: none;
+       }
+       .add-btn {
+           color: white;
+           padding: 6px 12px;
+           border-radius: 4px;
+           text-decoration: none;
+       }
+
+       .customer-btn {
+           background: yellowgreen;
+           color: white;
+           padding: 6px 12px;
+           border-radius: 4px;
+           text-decoration: none;
+       }
+       .invoice-btn {
+           background: yellowgreen;
+           color: white;
+           padding: 6px 12px;
+           border-radius: 4px;
+           text-decoration: none;
+       }
+       .product-btn {
+           background: yellowgreen;
+           color: white;
+           padding: 6px 12px;
+           border-radius: 4px;
+           text-decoration: none;
+       }
+
+       .error-message {
+           color: red;
+           font-size: 0.9em;
+           display: none;
+       }
+
+       .success-message {
+           color: green;
+           font-size: 0.9em;
+           display: none;
+       }
+
+       .error {
+           color: red;
+       }
+
+       .succss {
+           color: green
+       }
