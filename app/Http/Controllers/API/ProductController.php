@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $Products = Products::all();
+        $Products = Products::orderBy('id', 'desc')->get();
         return response()->json(
             [
                 'status' => true,

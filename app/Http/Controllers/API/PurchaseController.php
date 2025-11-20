@@ -8,12 +8,13 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
     public function index()
     {
-        $purchase = Purchase::with(['customer', 'product'])->get();
+        $purchase = Purchase::with(['customer', 'product'])->orderBy('id', 'desc')->get();
         return response()->json([
             'status'  => true,
             'message' => 'All Purchase List Fetched Successfully',
@@ -24,10 +25,8 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
             'product_id'  => 'required|exists:products,id',
             'quantity'    => 'required|integer|min:1',
-            'status'      => 'required|string',
         ]);
 
         return DB::transaction(function () use ($validated) {
@@ -44,17 +43,17 @@ class PurchaseController extends Controller
             $product->decrement('stock', $validated['quantity']);
 
             $purchase = Purchase::create([
-                'customer_id' => $validated['customer_id'],
-                'product_id'  => $product->id,
-                'quantity'    => $validated['quantity'],
-                'status'      => $validated['status'],
+                'customer_id' => Auth::user()->id,
+                'product_id' => $product->id,
+                'quantity' => $validated['quantity'],
+                'status' => 'Completed',
                 'total_price' => $product->price * $validated['quantity'],
             ]);
 
             return response()->json([
-                'status'  => true,
-                'message' => 'Purchase successful',
-                'data'    => $purchase
+                'status' => true,
+                'message' => 'Product Purchase successful',
+                'data' => $purchase
             ], 201);
         });
     }
@@ -71,7 +70,7 @@ class PurchaseController extends Controller
             ], 500);
         }
 
-        $customer = Customer::find($purchase->customer_id);
+        $customer = Customer::find($purchase->Auth::user()->id);
         $product = Products::find($purchase->product_id);
         $product->increment('stock', $purchase->quantity);
 
@@ -93,7 +92,7 @@ class PurchaseController extends Controller
         'invoice' => [
             'invoice_id'    => $purchase->id,
             'customer_id' => $purchase->customer,
-            'product_id'  => $purchase->product, 
+            'product_id'  => $purchase->product_id, 
             'quantity'      => $purchase->quantity,
             'total_price'   => $purchase->total_price,  
             'status'        => $purchase->status,
