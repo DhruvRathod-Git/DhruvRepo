@@ -67,6 +67,9 @@ Route::middleware('authCheck')->group(function () {
     Route::post('/update/{id}', [SalaryController::class, 'update'])->name('salary.update');
     Route::delete('/delete/{id}', [SalaryController::class, 'destroy'])->name('salary.destroy');
     });
+
     Route::get('/export', [SalaryController::class, 'export'])->name('salary.export');
+    Route::get('/salary/download/{id}', [SalaryController::class, 'downloadSalaryPDF'])
+    ->name('salary.download');
 
 });

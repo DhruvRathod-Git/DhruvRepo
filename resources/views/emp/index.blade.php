@@ -11,6 +11,7 @@
     @include('layout.css')
     <link rel="icon" type="image/x-icon" href="vnnovate.png">
 </head>
+
 <body class="bg-light" style="margin-bottom: 22px; margin-left: 250px; cursor: inherit;">
 
     <div class="container mt-4">
@@ -21,14 +22,14 @@
             </h3>
 
 
-@if(Auth::user()->role === 'admin')
-            <div class="p-3">
-                <a id="createNewEmp" href="javascript:void(0)" class="btn btn-success rounded-3 mb-3 fw-bold">
-                    <i class="bi bi-plus-lg"></i> Add Employee
-                </a>
-@endif
+            @if (Auth::user()->role === 'admin')
+                <div class="p-3">
+                    <a id="createNewEmp" href="javascript:void(0)" class="btn btn-success rounded-3 mb-3 fw-bold">
+                        <i class="bi bi-plus-lg"></i> Add Employee
+                    </a>
+            @endif
             <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover text-center" id="empTable">
+                <table class="table table-bordered table-striped table-hover text-center" id="empTable">
                     <thead class="table">
                         <tr>
                             <th>#</th>
@@ -77,32 +78,50 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Email</label>
                                 <input type="email" name="email" id="email" class="form-control">
+                                @error('email')
+                                    <small class="text-danger fw-semibold">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Password</label>
                                 <input type="password" name="password" id="password" class="form-control">
+                                @error('password')
+                                    <small class="text-danger fw-semibold">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Phone</label>
                                 <input type="tel" name="phone" id="phone" class="form-control" maxlength="10">
+                                @error('phone')
+                                    <small class="text-danger fw-semibold">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="col-12 mb-3">
                                 <label class="form-label">Address</label>
                                 <textarea name="address" id="address" class="form-control"></textarea>
+                                @error('address')
+                                    <small class="text-danger fw-semibold">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Image</label>
-                                <input type="file" name="image" id="image" class="form-control img-thumbnail mb-2" width="120"
-                                    accept="image/*">
+                                <input type="file" name="image" id="image"
+                                    class="form-control img-thumbnail mb-2" width="120" accept="image/*">
+                                @error('image')
+                                    <small class="text-danger fw-semibold">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Documents</label>
                                 <input type="file" name="documents[]" id="documents" class="form-control" multiple>
+                                @error('documents')
+                                    <small class="text-danger fw-semibold">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="col-12 mb-3">
@@ -115,6 +134,9 @@
                                             placeholder="Role">
                                         <input type="number" name="experience[0][years]" class="form-control mb-2"
                                             placeholder="Years Worked">
+                                        @error('experience')
+                                            <small class="text-danger fw-semibold">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <button type="button" id="addExpCreate" class="btn btn-primary btn-sm mt-2">+ Add
@@ -127,9 +149,7 @@
                         <button class="btn btn-success" type="submit">Create</button>
                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
                     </div>
-
                 </form>
-
             </div>
         </div>
     </div>
@@ -168,7 +188,7 @@
                     <div class="row mb-3">
                         <div class="col-4 fw-bold">Image:</div>
                         <div class="col-8">
-                            <img src="" id="emp-image"> 
+                            <img src="" id="emp-image">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -249,44 +269,35 @@
                 serverSide: true,
                 ajax: "{{ route('emp.index') }}",
                 columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone'
-                    },
-                    {
-                        data: 'address',
-                        name: 'address'
-                    },
-                    {
-                        data: 'image',
-                        name: 'image'
-                    },
-                    {
-                        data: 'documents',
-                        name: 'documents'
-                    },
-                    {
-                        data: 'experiences',
-                        name: 'experiences'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    }
-                ]
+                    data: 'id',
+                    name: 'id'
+                }, {
+                    data: 'name',
+                    name: 'name'
+                }, {
+                    data: 'email',
+                    name: 'email'
+                }, {
+                    data: 'phone',
+                    name: 'phone'
+                }, {
+                    data: 'address',
+                    name: 'address'
+                }, {
+                    data: 'image',
+                    name: 'image'
+                }, {
+                    data: 'documents',
+                    name: 'documents'
+                }, {
+                    data: 'experiences',
+                    name: 'experiences'
+                }, {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }]
             });
 
             $('#createNewEmp').click(function() {
@@ -332,7 +343,9 @@
 
                     // for documents display like link
                     $("#emp-documents").html(
-                    docs.map(d => `<a href="/storage/${d}" class="d-block" target="_blank">${d}</a>`).join(""));
+                        docs.map(d =>
+                            `<a href="/storage/${d}" class="d-block" target="_blank">${d}</a>`)
+                        .join(""));
                     let exps = JSON.parse(data.experiences || "[]");
                     $("#emp-experiences").html(exps.map(e =>
                         `${e.company} - ${e.role} (year:${e.years})`
@@ -369,11 +382,11 @@
                 });
             });
 
-            $(document).on("click", ".remove-experience", function () {
+            $(document).on("click", ".remove-experience", function() {
                 $(this).closest(".experience-item").remove();
             });
 
-    
+
             $('#updateEmpForm').submit(function(e) {
                 e.preventDefault();
 

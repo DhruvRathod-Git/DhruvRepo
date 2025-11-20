@@ -220,9 +220,7 @@
                     <th>Leave Deduction</th>
                     <th>Net Salary</th>
                     <th>Month</th>
-                    @if (Auth::user()->role === 'admin')
-                        <th>Actions</th>
-                    @endif
+                    <th>Actions</th>
                 </tr>
             </thead>
         </table>
@@ -261,16 +259,14 @@
             }, {
                 data: 'month',
                 name: 'month'
-            });
-
-            if (isAdmin) {
-                columns.push({
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                });
+            },{
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
             }
+            
+            );
 
             $(function() {
 
