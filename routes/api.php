@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products', [ProductController::class, 'store']); // Create product
 
     Route::get('/purchase', [PurchaseController::class, 'index']); // Purchase products lists
+    Route::get('purchase', [PurchaseController::class, 'orderCancel']); // Cancelled orders
     Route::post('/purchase', [PurchaseController::class, 'store']); // Purchase products
     Route::put('purchase/{id}/cancel', [PurchaseController::class, 'cancel']); // Cancel order
     Route::get('purchase/{id}/invoice', [PurchaseController::class, 'invoice']); // Generate invoice

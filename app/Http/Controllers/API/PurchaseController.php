@@ -16,9 +16,21 @@ class PurchaseController extends Controller
     {
         $purchase = Purchase::with(['customer', 'product'])->orderBy('id', 'desc')->get();
         return response()->json([
-            'status'  => true,
+            'status' => true,
             'message' => 'All Purchase List Fetched Successfully',
-            'data'    => $purchase,
+            'data' => $purchase,
+        ]);
+    }
+
+    public function orderCancel()
+    {
+        $purchase = Purchase::with(['customer', 'product'])->where('status', 'cancelled')
+        ->orderBy('id', 'desc')->get();
+        
+        return response()->json([
+            'status' => true,
+            'message' => 'All Cancelled Product Purchase List Fetched Successfully',
+            'data' => $purchase,
         ]);
     }
 
@@ -66,7 +78,7 @@ class PurchaseController extends Controller
             if (!$purchase->save()) {
             return response()->json([
             'status' => false,
-            'message' => 'Failed to cancel the order',
+            'message' => 'Failed to Cancel the order',
             ], 500);
         }
 
@@ -79,7 +91,7 @@ class PurchaseController extends Controller
 
         return response()->json([
             'status'  => true,
-            'message' => 'Order cancelled successfully',
+            'message' => 'Order Cancelled Successfully',
             'data' => $purchase
         ], 200);
     }
@@ -90,12 +102,12 @@ class PurchaseController extends Controller
 
     return response()->json([
         'invoice' => [
-            'invoice_id'    => $purchase->id,
-            'customer_id' => $purchase->customer,
-            'product_id'  => $purchase->product_id, 
-            'quantity'      => $purchase->quantity,
-            'total_price'   => $purchase->total_price,  
-            'status'        => $purchase->status,
+            'invoice_id' => $purchase->id,
+            'customer_id'=> $purchase->customer,
+            'product_id' => $purchase->product_id, 
+            'quantity' => $purchase->quantity,
+            'total_price' => $purchase->total_price,  
+            'status' => $purchase->status,
             ]
         ]);
     }
