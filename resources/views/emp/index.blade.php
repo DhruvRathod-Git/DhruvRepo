@@ -226,8 +226,8 @@
                         <div class="mb-3">
                             <label class="form-label">Experience</label>
                             <div id="exp-wrapper-edit"></div>
-                            <button type="button" id="addExpEdit" class="btn btn-primary btn-sm mt-2">+ Add
-                                Experience</button>
+                            {{-- <button type="button" id="addExpEdit" class="btn btn-primary btn-sm mt-2">+ Add
+                                Experience</button> --}}
                         </div>
                     </div>
 
@@ -318,7 +318,7 @@
                 });
             });
 
-            $('body').on('click', '#show-emp', function() {
+            $('body').on('click', '.show-emp', function() {
                 $.get($(this).data('url'), function(data) {
 
                     $('#empShowModal').modal('show');
@@ -340,7 +340,7 @@
                 });
             });
 
-            $('body').on('click', '#edit-emp', function() {
+            $('body').on('click', '.edit-emp', function() {
                 $.get($(this).data('url'), function(res) {
 
                     $('#editEmpModal').modal('show');
@@ -400,7 +400,7 @@
                 });
             });
 
-            $(document).on('click', '#delete-emp', function() {
+            $(document).on('click', '.delete-emp', function() {
 
                 let empId = $(this).data('id');
 

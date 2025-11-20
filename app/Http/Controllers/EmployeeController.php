@@ -8,6 +8,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\EmployeeController;
 use App\Exports\EmployeeExport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeController extends Controller
@@ -41,17 +42,28 @@ class EmployeeController extends Controller
                 }, $exps));
             })
             ->addColumn('action', function ($row) {
-                return '
-                    <a href="javascript:void(0)" id="show-emp" data-url="' . route('emp.show', $row->id) . '" class="btn btn-info btn-sm mb-1">
-                        <i class="bi bi-eye-fill"></i> View
-                    </a> 
-                    <a href="javascript:void(0)" id="edit-emp" data-url="' . route('emp.edit', $row->id) . '" class="btn btn-primary btn-sm mb-1">
-                        <i class="bi bi-pencil-square"></i> Edit
-                    </a>
-                    <a href="javascript:void(0)" id="delete-emp" data-id="' . $row->id . '" class="btn btn-danger btn-sm">
-                        <i class="bi bi-trash3"></i>Delete  
-                    </a>
-                ';
+               $btn = '<a href="javascript:void(0)" 
+                                class="btn btn-info btn-lg show-emp"
+                                data-id="'.$row->id.'" data-url="'.route('emp.show', $row->id).'">
+                                <i class="bi bi-eye-fill"></i>
+                            </a> ';
+
+                    if (Auth::user()->role === 'admin') {
+
+                        $btn .= '<a href="javascript:void(0)" 
+                                    class="btn btn-primary btn-lg edit-emp mt-1"
+                                    data-id="'.$row->id.'" data-url="'.route('emp.edit', $row->id).'">
+                                    <i class="bi bi-pencil-square"></i>
+                                 </a> ';
+
+                        $btn .= '<a href="javascript:void(0)" 
+                                    class="btn btn-danger delete-emp mt-1 btn-lg"
+                                    data-id="'.$row->id.'" data-url="'.route('emp.destroy', $row->id).'">
+                                    <i class="bi bi-trash3"></i>
+                                 </a>';
+                    }
+
+                    return $btn;
             })
             ->rawColumns(['image','documents','experiences','action'])
             ->make(true);
@@ -165,6 +177,6 @@ class EmployeeController extends Controller
 
     // public function export()
     // {
-    //     return Excel::download(new EmployeeExport, 'Employee-Data.pdf');
+    //     return Excel::download(new EmployeeExport, 'Employee-Data.xlsx');
     // }
 }
