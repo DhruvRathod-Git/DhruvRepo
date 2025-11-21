@@ -49,7 +49,7 @@
 
                                 <div class="mb-3 fw-semibold">
                                     <label>Employee</label>
-                                    <select class="form-select" name="employee_id" id="employee_id">
+                                    <select class="form-select" name="employee_id" id="employee_id" required>
                                         <option value="" disabled selected>Select Employee</option>
                                         @foreach ($employee as $emp)
                                             <option value="{{ $emp->id }}">{{ $emp->name }}</option>
@@ -59,18 +59,18 @@
 
                                 <div class="mb-3 fw-semibold">
                                     <label>Salary</label>
-                                    <input type="number" class="form-control" id="salary" name="salary">
+                                    <input type="number" class="form-control" id="salary" name="salary" required>
                                 </div>
 
                                 <div class="mb-3 fw-semibold">
                                     <label>PF</label>
-                                    <input type="number" class="form-control" id="pf" name="pf">
+                                    <input type="number" class="form-control" id="pf" name="pf" required>
                                 </div>
 
                                 <div class="mb-3 fw-semibold">
                                     <label>Leave Deduction</label>
                                     <input type="number" class="form-control" id="leave_deduction"
-                                        name="leave_deduction">
+                                        name="leave_deduction" required>
                                 </div>
 
                                 <div class="mb-3 fw-semibold">

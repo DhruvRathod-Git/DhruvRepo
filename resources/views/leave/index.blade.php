@@ -34,6 +34,7 @@
                                 <input type="hidden" name="leave_id" id="leave_id">
                                 @csrf
 
+                        @if(Auth::user()->role === 'admin')
                                 <div class="col-md-12">
                                     <label for="employee" class="form-label fw-semibold">Employee</label>
                                     <select name="employee" id="employee" class="form-select shadow-sm mb-3">
@@ -47,10 +48,14 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('emp')
+                                    @error('employee')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+                            @else
+                            <input type="hidden" name="employee" id="employee" value="{{ Auth::user()->name }}">
+                            @endif
+
 
                                 <label for="leave_date" class="form-label fw-semibold">Leave Date</label>
                                 <input type="date" name="leave_date" class="form-control" id="leave_date"

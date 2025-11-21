@@ -69,7 +69,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Name</label>
-                                <input type="text" name="name" id="name" class="form-control">
+                                <input type="text" name="name" id="name" class="form-control" required>
                                 @error('name')
                                     <small class="text-danger fw-semibold">{{ $message }}</small>
                                 @enderror
@@ -77,7 +77,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control">
+                                <input type="email" name="email" id="email" class="form-control"required>
                                 @error('email')
                                     <small class="text-danger fw-semibold">{{ $message }}</small>
                                 @enderror
@@ -85,7 +85,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Password</label>
-                                <input type="password" name="password" id="password" class="form-control">
+                                <input type="password" name="password" id="password" class="form-control"required>
                                 @error('password')
                                     <small class="text-danger fw-semibold">{{ $message }}</small>
                                 @enderror
@@ -93,7 +93,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Phone</label>
-                                <input type="tel" name="phone" id="phone" class="form-control" maxlength="10">
+                                <input type="tel" name="phone" id="phone" class="form-control" maxlength="10"required>
                                 @error('phone')
                                     <small class="text-danger fw-semibold">{{ $message }}</small>
                                 @enderror
@@ -101,7 +101,7 @@
 
                             <div class="col-12 mb-3">
                                 <label class="form-label">Address</label>
-                                <textarea name="address" id="address" class="form-control"></textarea>
+                                <textarea name="address" id="address" class="form-control"required></textarea>
                                 @error('address')
                                     <small class="text-danger fw-semibold">{{ $message }}</small>
                                 @enderror
@@ -110,7 +110,7 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Image</label>
                                 <input type="file" name="image" id="image"
-                                    class="form-control img-thumbnail mb-2" width="120" accept="image/*">
+                                    class="form-control img-thumbnail mb-2" width="120" accept="image/*" required>
                                 @error('image')
                                     <small class="text-danger fw-semibold">{{ $message }}</small>
                                 @enderror
@@ -118,7 +118,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Documents</label>
-                                <input type="file" name="documents[]" id="documents" class="form-control" multiple>
+                                <input type="file" name="documents[]" id="documents" class="form-control" multiple required>
                                 @error('documents')
                                     <small class="text-danger fw-semibold">{{ $message }}</small>
                                 @enderror
@@ -129,11 +129,11 @@
                                 <div id="exp-wrapper-create">
                                     <div class="experience-item border rounded p-2 mb-2">
                                         <input type="text" name="experience[0][company]" class="form-control mb-2"
-                                            placeholder="Company Name">
+                                            placeholder="Company Name" required>
                                         <input type="text" name="experience[0][role]" class="form-control mb-2"
-                                            placeholder="Role">
+                                            placeholder="Role" required>
                                         <input type="number" name="experience[0][years]" class="form-control mb-2"
-                                            placeholder="Years Worked">
+                                            placeholder="Years Worked"required>
                                         @error('experience')
                                             <small class="text-danger fw-semibold">{{ $message }}</small>
                                         @enderror
